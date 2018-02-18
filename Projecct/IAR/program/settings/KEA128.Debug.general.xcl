@@ -1,0 +1,15 @@
+"D:\Soft\IAR\IAR Systems\Embedded Workbench 7.4\arm\bin\armproc.dll" 
+
+"D:\Soft\IAR\IAR Systems\Embedded Workbench 7.4\arm\bin\armjlink2.dll" 
+
+"E:\直立车\新增归一化待测\KEA128\Projecct\IAR\program\Debug\Exe\KEA128.out" 
+
+--plugin "D:\Soft\IAR\IAR Systems\Embedded Workbench 7.4\arm\bin\armbat.dll" 
+
+--device_macro "D:\Soft\IAR\IAR Systems\Embedded Workbench 7.4\arm\config\debugger\NXP\KExx.dmac" 
+
+--flash_loader "D:\Soft\IAR\IAR Systems\Embedded Workbench 7.4\arm\config\flashloader\NXP\FlashKE04Z128_4.board" 
+
+
+
+

@@ -1,0 +1,92 @@
+[Stack]
+FillEnabled=0
+OverflowWarningsEnabled=1
+WarningThreshold=90
+SpWarningsEnabled=1
+WarnLogOnly=1
+UseTrigger=1
+TriggerName=main
+LimitSize=0
+ByteLimit=50
+[InterruptLog]
+LogEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+SumEnabled=0
+ShowTimeSum=1
+SumSortOrder=0
+[DataLog]
+LogEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+SumEnabled=0
+ShowTimeSum=1
+[Interrupts]
+Enabled=1
+[MemConfig]
+Base=1
+Manual=0
+Ddf=1
+TypeViol=0
+Stop=1
+[Simulator]
+Freq=10000000
+MultiCoreRunAll=1
+[JLinkDriver]
+CStepIntDis=_ 0
+LeaveTargetRunning=_ 0
+TraceBufferSize=0x00010000
+TraceStallIfFIFOFull=0x00000000
+TracePortSize=0x00000000
+[DebugChecksum]
+Checksum=-462002923
+[Exceptions]
+StopOnUncaught=_ 0
+StopOnThrow=_ 0
+[CodeCoverage]
+Enabled=_ 0
+[CallStack]
+ShowArgs=0
+[Disassembly]
+MixedMode=1
+[array_types]
+Fmt0=uint8[8]	3	0
+[watch_formats]
+Fmt0={W}42:dd	3	0
+[Trace1]
+Enabled=0
+ShowSource=1
+[Log file]
+LoggingEnabled=_ 0
+LogFile=_ ""
+Category=_ 0
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
+[DriverProfiling]
+Enabled=0
+Mode=1
+Graph=0
+Symbiont=0
+Exclusions=
+[CallStackLog]
+Enabled=0
+[CallStackStripe]
+ShowTiming=1
+[Disassemble mode]
+mode=0
+[Breakpoints2]
+Bp0=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\my_fun\oled\codetab.h}.13.10" 0 0 1 "" 0 "" 0
+Bp1=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\USER\src\main.c}.46.7" 0 0 1 "" 0 "" 0
+Bp2=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\USER\src\main.c}.34.3" 0 0 1 "" 0 "" 0
+Count=3
+[Aliases]
+A0=_ "D:\Project\直立车\总程序\总程序3.0\KEA128\Libraries\drives\src\KEA128_flash.c" ""
+A1=_ "D:\Project\直立车\总程序\总程序3.0\KEA128\Libraries\drives\src\KEA128_pit.c" ""
+A2=_ "D:\Project\直立车\总程序\总程序3.0\KEA128\Libraries\startup\DeviceSupport\IAR-ARM\startup_SKEAZ1284.s" ""
+A3=_ "D:\Project\直立车\总程序\总程序4.1\总程序\KEA128\Libraries\startup\DeviceSupport\IAR-ARM\startup_SKEAZ1284.s" ""
+A4=_ "D:\Project\直立车\总程序\总程序5.1\总程序\KEA128\Projecct\USER\src\main.c" ""
+A5=_ "D:\Project\直立车\总程序\总程序5.2\总程序\KEA128\Libraries\drives\src\KEA128_systick.c" ""
+A6=_ "D:\Project\直立车\总程序\总程序6.1\总程序6.0\总程序\KEA128\Libraries\startup\DeviceSupport\IAR-ARM\startup_SKEAZ1284.s" ""
+Count=7
+SuppressDialog=1
