@@ -1,16 +1,22 @@
 #include "control.h"
 #include "math.h"
 
-char Debug_Mode = 1;
+/*死区电压*/
 
+#define PWM_R_END 60//95
+#define PWM_L_END 20//70
 
+char Debug_Mode = 2;
+
+extern int16 OutData[4];
 extern u8 P_A,D_A,P_S,I_S,P_T,D_T;
 extern float PWM_ANGLE,PWM_SPEED_OUT,PWM_TURN;
+extern float Gyro,Angle,Angle_Last,Gyro_Last,Gyro_ago,ANGLE_I,Gyro_Turn,PWM_ANGLE_AGO;                         //处理后原始数据
+
 
 uint8 cnt = 0;
 float PWM_L,PWM_R,PWM;
-u8 P_A=14,D_A=4,P_S=80,I_S=2,P_T=18,D_T=20;
-
+u8 P_A=24,D_A=11,P_S=40,I_S=30,P_T=18,D_T=20;
 
 //PWM输出
 void duty_pwm()
@@ -23,49 +29,49 @@ void duty_pwm()
 	}
 	else if(Debug_Mode==1)
 	{
-		PWM = PWM_ANGLE- PWM_SPEED_OUT;//速度负反馈，提供倾角
+		PWM = PWM_ANGLE + PWM_SPEED_OUT;//速度负反馈，提供倾角
 		PWM_L = PWM;
 		PWM_R = PWM;
 	}
 	
 	else if(Debug_Mode==2)
 	{
-	PWM = PWM_ANGLE - PWM_SPEED_OUT;//速度负反馈，提供倾角
+	PWM = PWM_ANGLE + PWM_SPEED_OUT;//速度负反馈，提供倾角
 	PWM_L = PWM - PWM_TURN;
 	PWM_R = PWM + PWM_TURN;
 	}
 	
 	/***********************将最大速度限制在985个PWM内******************************/
-    if(PWM_L > 938)  
-			PWM_L = 938;
-    else if(PWM_L < -938) 
-			PWM_L = -938;
+    if(PWM_L > (1000-PWM_L_END))  
+			PWM_L = (1000-PWM_L_END);
+    else if(PWM_L < -(1000-PWM_L_END)) 
+			PWM_L = -(1000-PWM_L_END);
 		
-    if(PWM_R > 938)  
-			PWM_R = 938;
-    else if(PWM_R < -938) 
-			PWM_R = -938;
+    if(PWM_R > (1000-PWM_R_END))  
+			PWM_R = (1000-PWM_R_END);
+    else if(PWM_R < -(1000-PWM_R_END)) 
+			PWM_R = -(1000-PWM_R_END);
 		
   /*****************设置占空比*********************************************************/
 		if(PWM_R<0)
 		{
-			ftm_pwm_duty(ftm2,ftm_ch0,0);     //设置占空比为百分之（100/FTM0_PRECISON*100）
-			ftm_pwm_duty(ftm2,ftm_ch1,(u32)(-PWM_R+62)); 
+			ftm_pwm_duty(ftm2,ftm_ch1,0);     //设置占空比为百分之（100/FTM0_PRECISON*100）
+			ftm_pwm_duty(ftm2,ftm_ch0,(u32)(-PWM_R+PWM_R_END)); //62
 		}
 		else
 		{
-			ftm_pwm_duty(ftm2,ftm_ch1,0);     //设置占空比为百分之（100/FTM0_PRECISON*100）
-			ftm_pwm_duty(ftm2,ftm_ch0,(u32)(PWM_R+62)); 
+			ftm_pwm_duty(ftm2,ftm_ch0,0);     //设置占空比为百分之（100/FTM0_PRECISON*100）
+			ftm_pwm_duty(ftm2,ftm_ch1,(u32)(PWM_R+PWM_R_END)); 
 		}
 		if(PWM_L<0)
 		{
 			ftm_pwm_duty(ftm2,ftm_ch3,0);
-			ftm_pwm_duty(ftm2,ftm_ch2,(u32)(-PWM_L+62));
+			ftm_pwm_duty(ftm2,ftm_ch2,(u32)(-PWM_L+PWM_L_END));//62
 		}
 		else
 		{
 			ftm_pwm_duty(ftm2,ftm_ch2,0);
-			ftm_pwm_duty(ftm2,ftm_ch3,(u32)(PWM_L+62));
+			ftm_pwm_duty(ftm2,ftm_ch3,(u32)(PWM_L+PWM_L_END));
 		}
 		
 		
@@ -80,6 +86,7 @@ void duty_5ms()
 	cnt++;
 	//5ms一次直立环
 	duty_angle();
+		
 	
 	if(Debug_Mode==1)
 	{
@@ -145,6 +152,7 @@ void READ_8_DATA(void)
 void DISPLAY(void)
 {
   DisableInterrupts; 
+
 
   OLED_ShowString(0,4,(uint8*)"AP:     ",16);	
   OLED_MY_ShowNum(25,4,P_A,16);

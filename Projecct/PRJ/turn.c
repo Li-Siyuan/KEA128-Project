@@ -26,24 +26,19 @@ void get_track()
             adc_value1[i] = adc_once(ADC0_SE0,ADC_12bit);
 						
 						if(adc_value1[i] > adc1_max)
-							adc1_max = adc_value1[i];   //上电以来所有采集值的最大值
+							adc1_max = adc_value1[i];
 						
 						else if(adc_value1[i] <= adc1_min)
-							adc1_min = adc_value1[i];   //上电以来所有采集值的最小值
+							adc1_min = adc_value1[i];
 						
-						adc1 += adc_value1[i];        //采集五次求和
+						adc1 += (((float)(adc_value1[i]-adc1_min)/(float)(adc1_max-adc1_min))*700);
           }
-          max = max_sort(adc_value1,5);   //五次中的最大值
-          min = min_sort(adc_value1,5);   //五次中的最小值
-					
-					//减去五次中的最大值和最小值
+          max = max_sort(adc_value1,5);
+          min = min_sort(adc_value1,5);
           adc1 -= adc_value1[max];
           adc1 -= adc_value1[min];
-					
-					//剩余三次求平均，并归一化
-          adc1 = (((float)(adc1/3-adc1_min)/(float)(adc1_max-adc1_min))*100);
-            
-					
+          adc1 = adc1/3;
+                   
           for(i=0;i<5;i++)
           {
              adc_value2[i] = adc_once(ADC0_SE1,ADC_12bit);
@@ -54,13 +49,13 @@ void get_track()
 						else if(adc_value2[i] <= adc2_min)
 							adc2_min = adc_value2[i];
 						
-						adc2 += adc_value1[i];
+						adc2 += (((float)(adc_value2[i]-adc2_min)/(float)(adc2_max-adc2_min))*700);
           }
           max = max_sort(adc_value2,5);
           min = min_sort(adc_value2,5);
           adc2 -= adc_value2[max];
           adc2 -= adc_value2[min];
-          adc2 = (((float)(adc2/3-adc2_min)/(float)(adc2_max-adc2_min))*100);
+          adc2 = adc2/3;
                     
          for(i=0;i<5;i++)
           {
@@ -72,13 +67,13 @@ void get_track()
 						else if(adc_value3[i] <= adc3_min)
 							adc3_min = adc_value3[i];
 						
-						adc3 += adc_value2[i];
+						adc3 += (((float)(adc_value3[i]-adc3_min)/(float)(adc3_max-adc3_min))*700);
           }
           max = max_sort(adc_value3,5);
           min = min_sort(adc_value3,5);
           adc3 -= adc_value3[max];
           adc3 -= adc_value3[min];
-          adc3 = (((float)(adc3/3-adc3_min)/(float)(adc3_max-adc3_min))*100);
+          adc3 = adc3/3;
 					
 #ifdef  DEBUG_MODE
 					if(adc3>=17)
@@ -245,6 +240,20 @@ void duty_turn()
 	P_TURN = P_TURN+10;
 	D_TURN = D_TURN+10;
 	#endif
+	
+	
+/******************************************************最大转弯半径限制***************************************/
+	#ifdef  MAX_RADIUS
+	if(abs(PWM_TURN )>400)
+	{
+		if(PWM_TURN<0)
+			PWM_TURN=-400;
+		else
+	    PWM_TURN=400;
+	}
+	
+	#endif
+	
 		
 }
 

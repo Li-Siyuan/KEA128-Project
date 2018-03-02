@@ -20,6 +20,8 @@
 //#define  USE_TURN_BLUR_PD
 //使用分组PD
 //#define  USE_TURN_MOVE_PD
+//使用最大转弯半径限制
+//#define  MAX_RADIUS
 
 
 

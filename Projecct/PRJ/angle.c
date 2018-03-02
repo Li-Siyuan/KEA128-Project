@@ -31,7 +31,7 @@ void angle_get()
 	//数据处理
 	 Gyro = (gyro_offset_z + mpu_gyro_z) * Gyro_ratio;                           //陀螺仪采集到的角速度归一化
 	 Gyro_Turn = -(gyro_offset_x - mpu_gyro_x) * Gyro_ratio;                     //陀螺仪采集到的角速度归一化
-   Angle = (mpu_acc_y+angle_offset) / Angle_ratio ;                          //将加速度计采集到的角度归一化，乘上0.375是为了归一化到0~90°
+   Angle = (mpu_acc_y-angle_offset) / Angle_ratio ;                          //将加速度计采集到的角度归一化，乘上0.375是为了归一化到0~90°
 
    if(Angle > 90)Angle = 90;                                              //防止加速度角度溢出
    if(Angle < -90)Angle = -90;
@@ -52,7 +52,7 @@ void angle_get()
 	#endif
 	
 	#ifdef UPDATE
-	 IMUupdate(angleX, angleY, angleZ, gyroX, gyroY, gyroZ); //新滤波
+	 IMUupdate(angleX, angleY, angleZ, gyroX, gyroY, gyroZ); //新滤波方案
 	 Angle_Last = AngleX;
 	 Gyro_Last = Gyro;
 	#endif
@@ -67,7 +67,7 @@ void duty_angle()
 	
 	/**************************************************************普通PD************************************************************************/
 #ifdef USE_ANGLE_PD 
-	PWM_ANGLE = P_ANGLE*Angle_Last + D_ANGLE*Gyro_Last/4;	
+	PWM_ANGLE = P_ANGLE*Angle_Last + D_ANGLE*Gyro_Last/10;	
 #endif
 	
 	/**************************************************************滑动PD************************************************************************/

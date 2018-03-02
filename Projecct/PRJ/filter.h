@@ -3,7 +3,7 @@
 
 
 //清华融合滤波参数
-#define GRAVITY_ADJUST_TIME_CONSTANT     1.6      //0.1 //波形偏下减小该值   2
+#define GRAVITY_ADJUST_TIME_CONSTANT     2     //1.6 //0.1 //波形偏下减小该值   2
 #define DT                               0.005    //0.005
 
 

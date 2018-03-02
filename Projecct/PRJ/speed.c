@@ -1,10 +1,10 @@
 #include "speed.h"
 
-float speedL , speedR ,speed_error,speed_need=300,speed_now; 
+float speedL , speedR ,speed_error,speed_need=800,speed_now; 
 double speed_I=0;
 float I_MOVE=1;
 float PWM_SPEED,PWM_SPEED_OUT,PWM_SPEED_AGO;
-float MOVE=12;
+float MOVE=1.6;
 extern int16 Angle_Need;
 extern uint8 cnt;
 extern u8 P_S,I_S;
@@ -25,35 +25,40 @@ void duty_speed()                                  //²âÊÔÏÂ¼ÓËÙ½×¶ÎÊ±¼ä£¬¼´Ê±¼ä³
   ftm_count_clean(ftm0);         //ÇåÂö³åÊı
   ftm_count_clean(ftm1);
           
-	if(gpio_get(DIR_L)==0)        //ÅĞ¶Ï·½Ïò
+	if(gpio_get(DIR_L)==1)        //ÅĞ¶Ï·½Ïò
 		speedL = -speedL;
-	if(gpio_get(DIR_R)==1)
+	if(gpio_get(DIR_R)==0)
 		speedR = -speedR;
 	
 	speed_now = (speedL + speedR)/2;  //µÃµ½µ±Ç°Âö³åÊı
 	speed_error = (speed_need - speed_now);    //µÃµ½ËÙ¶ÈÆ«²î
         
 	//ÉèÖÃ±äËÙ»ı·ÖÏµÊı
-if((speed_error>=0?speed_error:-speed_error)<I_MIN)
+/*if((speed_error>=0?speed_error:-speed_error)<I_MIN)
 		I_MOVE = 1;
 	else if(((speed_error>=0?speed_error:-speed_error)>=I_MIN) && ((speed_error>=0?speed_error:-speed_error)<I_MAX))
 		I_MOVE = (I_MAX-(speed_error>=0?speed_error:-speed_error))/(I_MAX-I_MIN);
 	else if((speed_error>=0?speed_error:-speed_error)>=I_MAX)
-		I_MOVE = 0;
+		I_MOVE = 0;*/
 	/*if(speed_error>25)
 			I_MOVE = 0;*/	
 	
-//	if((flag_I==0)||(PWM>0&&speed_I<0)||(PWM<0&&speed_I>0))   //ÈôÃ»ÓĞ±¥ºÍ»ò·´Ïò»ı·Ö£¬ÔòÀÛ¼Ó»ı·ÖÁ¿
-		speed_I += speed_error*I_MOVE;          //±äËÙ»ı·Ö          
+			speed_I += speed_error*I_MOVE;          //±äËÙ»ı·Ö          
 	
-	if(speed_I>1000)                          //»ı·ÖÏŞ·ù
-		speed_I = 1000;
+//	if((flag_I==0)||(PWM>0&&speed_I<0)||(PWM<0&&speed_I>0))   //ÈôÃ»ÓĞ±¥ºÍ»ò·´Ïò»ı·Ö£¬ÔòÀÛ¼Ó»ı·ÖÁ¿
+	
+	
+	if(speed_I>5000)                          //»ı·ÖÏŞ·ù
+		speed_I = 5000;
 	else if(speed_I<-1000)
 		speed_I = -1000;
 	
+		if(speed_error>300||speed_error<-300)
+			speed_I = 0;
+	
 	PWM_SPEED_AGO = PWM_SPEED;
 	//20·ÖÈı½ÇĞÎÊä³ö£¬ĞŞ¸ÄÔ­À´µÄÌİĞÎÇúÏßÎªĞ±ÆÂÕÛÏß
-	PWM_SPEED = P_SPEED*speed_error*0.01 + I_SPEED*speed_I*0.001; //£¨Êä³ö¼ÓËÙ¶È£¨ÆÚÍû½Ç¶È£©£©	£¬ÏÈµ÷I£¬ºóµ÷P
+	PWM_SPEED = P_SPEED*speed_error*0.03 + I_SPEED*speed_I*0.006; //£¨Êä³ö¼ÓËÙ¶È£¨ÆÚÍû½Ç¶È£©£©	£¬ÏÈµ÷I£¬ºóµ÷P
 	PWM_SPEED_OUT = (PWM_SPEED-PWM_SPEED_AGO)*cnt/20 + PWM_SPEED_AGO;
 	
 	//ÏŞ·ùËÙ¶È»·Êä³ö×î´óÎª½Ç¶È»·µÄMOVE±¶
