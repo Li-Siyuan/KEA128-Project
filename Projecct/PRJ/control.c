@@ -16,7 +16,7 @@ extern float Gyro,Angle,Angle_Last,Gyro_Last,Gyro_ago,ANGLE_I,Gyro_Turn,PWM_ANGL
 
 uint8 cnt = 0;
 float PWM_L,PWM_R,PWM;
-u8 P_A=24,D_A=11,P_S=20,I_S=10,P_T=10,D_T=17;
+u8 P_A=28,D_A=11,P_S=18,I_S=10,P_T=11,D_T=18;
 
 //PWMÊä³ö
 void duty_pwm()

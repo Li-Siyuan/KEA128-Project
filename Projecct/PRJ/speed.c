@@ -34,12 +34,12 @@ void duty_speed()                                  //²âÊÔÏÂ¼ÓËÙ½×¶ÎÊ±¼ä£¬¼´Ê±¼ä³
 	speed_error = (speed_need - speed_now);    //µÃµ½ËÙ¶ÈÆ«²î
         
 	//ÉèÖÃ±äËÙ»ı·ÖÏµÊı
-/*if((speed_error>=0?speed_error:-speed_error)<I_MIN)
+if((speed_error>=0?speed_error:-speed_error)<I_MIN)
 		I_MOVE = 1;
 	else if(((speed_error>=0?speed_error:-speed_error)>=I_MIN) && ((speed_error>=0?speed_error:-speed_error)<I_MAX))
 		I_MOVE = ((speed_error>=0?speed_error:-speed_error)-I_MIN)/(I_MAX-I_MIN);
 	else if((speed_error>=0?speed_error:-speed_error)>=I_MAX)
-		I_MOVE = 0;*/
+		I_MOVE = 0;
 	/*if(speed_error>25)
 			I_MOVE = 0;*/	
 	
@@ -48,10 +48,10 @@ void duty_speed()                                  //²âÊÔÏÂ¼ÓËÙ½×¶ÎÊ±¼ä£¬¼´Ê±¼ä³
 //	if((flag_I==0)||(PWM>0&&speed_I<0)||(PWM<0&&speed_I>0))   //ÈôÃ»ÓĞ±¥ºÍ»ò·´Ïò»ı·Ö£¬ÔòÀÛ¼Ó»ı·ÖÁ¿
 	
 	
-	if(speed_I>3000)                          //»ı·ÖÏŞ·ù
-		speed_I = 3000;
-	else if(speed_I<-3000)
-		speed_I = -3000;
+	if(speed_I>3500)                          //»ı·ÖÏŞ·ù
+		speed_I = 3500;
+	else if(speed_I<-3500)
+		speed_I = -3500;
 	
 //		if(speed_error>300||speed_error<-300)
 //			speed_I = 0;

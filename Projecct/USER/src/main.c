@@ -44,19 +44,19 @@ int main()
 		OLED_MY_ShowNum(0,0,max,16);
 		OLED_MY_ShowNum(25,0,adc1/10,16);
 		
-		OLED_MY_ShowNum(75,0,adc2/10,16);
+		OLED_MY_ShowNum(50,0,adc2/10,16);
 		OLED_MY_ShowNum(75,0,min,16);
 
 	//	speed_I = 3000;
 		
 		//发送波形到上位机		
 #if 1	
-		 OutData[0] = (int16)speed_I;  //speed_now
+		 OutData[0] = (int16)adc1;//speed_I;  //speed_now
       // OutData[0] = (int16)Angle;                   //红
 		
 	  	OutData[1] = (int16)turn_error;	//PWM_ANGLE
     			                  		         //黄
-      OutData[2] = (int16)PWM_SPEED_OUT;//PWM_SPEED;              		 //蓝
+      OutData[2] = (int16)adc2;//PWM_SPEED_OUT;//PWM_SPEED;              		 //蓝
       OutData[3] = (int16)speed_now;//P_SPEED*speed_error*0.01;//turn_error;             			 //紫
       OutPut_Data();
 
