@@ -1,6 +1,6 @@
 #include "speed.h"
 
-float speedL , speedR ,speed_error,speed_need=1200,speed_now; 
+float speedL , speedR ,speed_error,speed_need=1400,speed_now; 
 double speed_I=0;
 float I_MOVE=1;
 float PWM_SPEED,PWM_SPEED_OUT,PWM_SPEED_AGO;
@@ -34,12 +34,12 @@ void duty_speed()                                  //²âÊÔÏÂ¼ÓËÙ½×¶ÎÊ±¼ä£¬¼´Ê±¼ä³
 	speed_error = (speed_need - speed_now);    //µÃµ½ËÙ¶ÈÆ«²î
         
 	//ÉèÖÃ±äËÙ»ý·ÖÏµÊý
-if((speed_error>=0?speed_error:-speed_error)<I_MIN)
+/*if((speed_error>=0?speed_error:-speed_error)<I_MIN)
 		I_MOVE = 1;
 	else if(((speed_error>=0?speed_error:-speed_error)>=I_MIN) && ((speed_error>=0?speed_error:-speed_error)<I_MAX))
 		I_MOVE = ((speed_error>=0?speed_error:-speed_error)-I_MIN)/(I_MAX-I_MIN);
 	else if((speed_error>=0?speed_error:-speed_error)>=I_MAX)
-		I_MOVE = 0;
+		I_MOVE = 0;*/
 	/*if(speed_error>25)
 			I_MOVE = 0;*/	
 	
