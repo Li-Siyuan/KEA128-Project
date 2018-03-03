@@ -1,7 +1,8 @@
 #include "turn.h"
 #include "math.h"
+uint16 adc_value1[5]={0},adc_value2[5]={0},adc_value3[5]={0},adc1=0,adc2=0,adc3=0;
 
-
+		u8 max=0; u8 min=0;
 int16 turn_error,turn_need;                     
 float PWM_TURN;
 float adc1_max = 0,adc1_min = 0,adc2_max = 0,adc2_min = 0,adc3_max = 0,adc3_min = 0;
@@ -11,10 +12,12 @@ extern u8 P_T,D_T;
 int sensor[3]={0};
 void get_track()
 {
-	  int16 adc_value1[5]={0},adc_value2[5]={0},adc_value3[5]={0},adc1=0,adc2=0,adc3=0;
-		u8 max=0; u8 min=0;
+
     int i;
        
+   	adc1=0;
+		adc2=0;
+		adc3=0;
 	
 	//float en=0,ez=0,ep=0,ecn=0,ecz=0,ecp=0,nn=0,nz=0,np=0,zn=0,zz=0,zp=0,pn=0,pz=0,pp=0,n=0,z=0,p=0;
 //	float arr[4]={0};
@@ -23,7 +26,7 @@ void get_track()
 					for(i=0;i<5;i++)
           {
 						
-            adc_value1[i] = adc_once(ADC0_SE0,ADC_12bit);
+            adc_value1[i] = (uint16)adc_once(ADC0_SE0,ADC_12bit);
 						
 						if(adc_value1[i] > adc1_max)
 							adc1_max = adc_value1[i];
@@ -31,31 +34,31 @@ void get_track()
 						else if(adc_value1[i] <= adc1_min)
 							adc1_min = adc_value1[i];
 						
-						adc1 += (((float)(adc_value1[i]-adc1_min)/(float)(adc1_max-adc1_min))*700);
+						adc1 =adc1+adc_value1[i];//((adc_value1[i]-adc1_min)*700/(adc1_max-adc1_min));
           }
-          max = max_sort(adc_value1,5);
+         max = max_sort(adc_value1,5);
           min = min_sort(adc_value1,5);
           adc1 -= adc_value1[max];
           adc1 -= adc_value1[min];
-          adc1 = adc1/3;
+          adc1 = adc1/3/25;
                    
           for(i=0;i<5;i++)
           {
-             adc_value2[i] = adc_once(ADC0_SE1,ADC_12bit);
+             adc_value2[i] = (uint16)adc_once(ADC0_SE1,ADC_12bit);
 						
 						if(adc_value2[i] > adc2_max)
 							adc2_max = adc_value2[i];
 						
 						else if(adc_value2[i] <= adc2_min)
 							adc2_min = adc_value2[i];
-						
-						adc2 += (((float)(adc_value2[i]-adc2_min)/(float)(adc2_max-adc2_min))*700);
+						adc2 =adc2+adc_value2[i];
+						//adc2 += (((float)(adc_value2[i]-adc2_min)/(float)(adc2_max-adc2_min))*700);
           }
           max = max_sort(adc_value2,5);
           min = min_sort(adc_value2,5);
           adc2 -= adc_value2[max];
           adc2 -= adc_value2[min];
-          adc2 = adc2/3;
+          adc2 = adc2/3/25;
                     
          for(i=0;i<5;i++)
           {
@@ -73,12 +76,12 @@ void get_track()
           min = min_sort(adc_value3,5);
           adc3 -= adc_value3[max];
           adc3 -= adc_value3[min];
-          adc3 = adc3/3;
+          adc3 = adc3/3/25;
 					
 #ifdef  DEBUG_MODE
-					if(adc3>=17)
+				/*	if(adc3>=17)
 						turn_error = 0;
-					else
+					else*/
 						turn_error = (sqrt(adc1)-sqrt(adc2))/(adc1+adc2)*400;//该公式在adc为0~100时，结果为-40~40，单调递增 
 					  sensor[0]=adc1;
 	          sensor[1]=adc2;
@@ -152,7 +155,7 @@ void duty_turn()
 	
 	/******************************************************普通PD***************************************************/
 	#ifdef  USE_TURN_PD
-	PWM_TURN = P_TURN*turn_error - D_TURN*Gyro_Turn;
+	PWM_TURN = P_TURN*turn_error*5 - D_TURN*Gyro_Turn/10;
 	#endif
 	
 	
@@ -243,7 +246,7 @@ void duty_turn()
 	
 	
 /******************************************************最大转弯半径限制***************************************/
-	#ifdef  MAX_RADIUS
+	#ifdef  MAX_RADIUS1
 	if(abs(PWM_TURN )>400)
 	{
 		if(PWM_TURN<0)

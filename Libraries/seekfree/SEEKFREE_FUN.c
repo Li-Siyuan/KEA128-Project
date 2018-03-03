@@ -81,7 +81,7 @@ int16 limit_ab(int16 x, uint16 a, uint16 b)
     return x;
 }
 
-u8 max_sort(int16* arr, u8 n)
+u8 max_sort(uint16* arr, u8 n)
 {
 	int i;
 	int max=0;
@@ -95,7 +95,7 @@ u8 max_sort(int16* arr, u8 n)
 	return max;
 }
 
-u8 min_sort(int16* arr, u8 n)
+u8 min_sort(uint16* arr, u8 n)
 {
 	int i;
 	int min=0;

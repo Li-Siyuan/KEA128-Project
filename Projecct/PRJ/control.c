@@ -16,7 +16,7 @@ extern float Gyro,Angle,Angle_Last,Gyro_Last,Gyro_ago,ANGLE_I,Gyro_Turn,PWM_ANGL
 
 uint8 cnt = 0;
 float PWM_L,PWM_R,PWM;
-u8 P_A=24,D_A=11,P_S=40,I_S=30,P_T=18,D_T=20;
+u8 P_A=24,D_A=11,P_S=20,I_S=10,P_T=10,D_T=17;
 
 //PWM输出
 void duty_pwm()
@@ -36,7 +36,7 @@ void duty_pwm()
 	
 	else if(Debug_Mode==2)
 	{
-	PWM = PWM_ANGLE + PWM_SPEED_OUT;//速度负反馈，提供倾角
+	PWM = PWM_ANGLE + PWM_SPEED_OUT + 250;//速度负反馈，提供倾角
 	PWM_L = PWM - PWM_TURN;
 	PWM_R = PWM + PWM_TURN;
 	}

@@ -1,7 +1,8 @@
 #include "control.h"
 //中断服务函数在isr.c
-
-
+extern float adc1_max,adc1_min;
+extern u8 max,min;
+extern uint16 adc1,adc2,adc_value1[5];
 extern float speed_now,speed_need,speed_error;//现在、需要、偏差速度
 extern double speed_I;//速度的积分
 extern int16 turn_error,OutData[4],sensor[3];
@@ -40,21 +41,23 @@ int main()
 		KEY_SCAN();	   //按键扫描
 		
 		//由于pit中断会打断与oled的iic通信，故显示较缓慢且闪烁
-	//	OLED_ShowString(0,0,(uint8*)"s_n:         ",16);
-	//	OLED_MY_ShowNum(0,0,turn_error,16);
+		OLED_MY_ShowNum(0,0,max,16);
+		OLED_MY_ShowNum(25,0,adc1/10,16);
 		
-	//	OLED_ShowString(50,0,(uint8*)"t_e:        ",16);
-	//	OLED_MY_ShowNum(75,0,turn_error,16);
+		OLED_MY_ShowNum(75,0,adc2/10,16);
+		OLED_MY_ShowNum(75,0,min,16);
 
+	//	speed_I = 3000;
+		
 		//发送波形到上位机		
 #if 1	
-		 OutData[0] = (int16)speed_now;  
+		 OutData[0] = (int16)speed_I;  //speed_now
       // OutData[0] = (int16)Angle;                   //红
 		
-	  	OutData[1] = (int16)PWM_ANGLE;	
-     // OutData[1] = (int16)speed_I;					         //黄
+	  	OutData[1] = (int16)turn_error;	//PWM_ANGLE
+    			                  		         //黄
       OutData[2] = (int16)PWM_SPEED_OUT;//PWM_SPEED;              		 //蓝
-      OutData[3] = (int16)speed_I;//P_SPEED*speed_error*0.01;//turn_error;             			 //紫
+      OutData[3] = (int16)speed_now;//P_SPEED*speed_error*0.01;//turn_error;             			 //紫
       OutPut_Data();
 
 #endif
