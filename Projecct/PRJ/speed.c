@@ -1,6 +1,6 @@
 #include "speed.h"
 
-float speedL , speedR ,speed_error,speed_need=2200,speed_now; 
+float speedL , speedR ,speed_error,speed_need=1200,speed_now; 
 double speed_I=0;
 float I_MOVE=1;
 float PWM_SPEED,PWM_SPEED_OUT,PWM_SPEED_AGO;
@@ -43,15 +43,15 @@ if((speed_error>=0?speed_error:-speed_error)<I_MIN)
 	/*if(speed_error>25)
 			I_MOVE = 0;*/	
 	
-			speed_I += speed_error*I_MOVE;          //变速积分          
+			speed_I += speed_error*I_MOVE*0.1;          //变速积分          
 	
 //	if((flag_I==0)||(PWM>0&&speed_I<0)||(PWM<0&&speed_I>0))   //若没有饱和或反向积分，则累加积分量
 	
 	
-	if(speed_I>1000)                          //积分限幅
-		speed_I = 1000;
-	else if(speed_I<-1000)
-		speed_I = -1000;
+	if(speed_I>3000)                          //积分限幅
+		speed_I = 3000;
+	else if(speed_I<-3000)
+		speed_I = -3000;
 	
 //		if(speed_error>300||speed_error<-300)
 //			speed_I = 0;
