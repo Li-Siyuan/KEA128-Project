@@ -79,9 +79,9 @@ void get_track()
           adc3 = adc3/3/25;
 					
 #ifdef  DEBUG_MODE
-				/*	if(adc3>=17)
+					if(adc1<10&&adc2<10)
 						turn_error = 0;
-					else*/
+					else
 						turn_error = (sqrt(adc1)-sqrt(adc2))/(adc1+adc2)*400;//该公式在adc为0~100时，结果为-40~40，单调递增 
 					  sensor[0]=adc1;
 	          sensor[1]=adc2;
