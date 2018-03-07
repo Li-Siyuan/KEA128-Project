@@ -1046,7 +1046,7 @@ I (..\PRJ\key.h)(0x5A9F758F)
 I (..\PRJ\master.h)(0x5A9F758F)
 I (..\PRJ\COMPUTER.h)(0x5A9F758F)
 F (..\my_fun\my_nrf\my_nrf.h)(0x5A9F758F)()
-F (..\PRJ\control.c)(0x5A9F8F8A)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections --signed_chars -I ..\USER\inc -I ..\USER\src -I ..\..\Libraries\drives\inc -I ..\..\Libraries\drives\src -I ..\..\Libraries\seekfree -I ..\..\Libraries\startup\CoreSupport -I ..\..\Libraries\startup -I ..\..\Libraries\startup\DeviceSupport -I ..\..\Libraries\startup\DeviceSupport\MDK-ARM -I ..\my_fun\moni_iic -I ..\my_fun\mpu6050 -I ..\my_fun\nvic -I ..\my_fun\oled -I ..\my_fun\my_nrf -I ..\PRJ -I ..\PRJ -I ..\PRJ -D__UVISION_VERSION="524" -DSKEAZ128xxx4-o .\objects\control.o --omf_browse .\objects\control.crf --depend .\objects\control.d)
+F (..\PRJ\control.c)(0x5A9FA7B7)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections --signed_chars -I ..\USER\inc -I ..\USER\src -I ..\..\Libraries\drives\inc -I ..\..\Libraries\drives\src -I ..\..\Libraries\seekfree -I ..\..\Libraries\startup\CoreSupport -I ..\..\Libraries\startup -I ..\..\Libraries\startup\DeviceSupport -I ..\..\Libraries\startup\DeviceSupport\MDK-ARM -I ..\my_fun\moni_iic -I ..\my_fun\mpu6050 -I ..\my_fun\nvic -I ..\my_fun\oled -I ..\my_fun\my_nrf -I ..\PRJ -I ..\PRJ -I ..\PRJ -D__UVISION_VERSION="524" -DSKEAZ128xxx4-o .\objects\control.o --omf_browse .\objects\control.crf --depend .\objects\control.d)
 I (..\PRJ\control.h)(0x5A9F758F)
 I (..\..\Libraries\drives\inc\headfile.h)(0x5A9F758E)
 I (..\..\Libraries\drives\inc\common.h)(0x5A9F758E)
