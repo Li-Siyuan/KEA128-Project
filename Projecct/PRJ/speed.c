@@ -47,11 +47,11 @@ if((speed_error>=0?speed_error:-speed_error)<I_MIN)
 	
 //	if((flag_I==0)||(PWM>0&&speed_I<0)||(PWM<0&&speed_I>0))   //若没有饱和或反向积分，则累加积分量
 	
-	
-	if(speed_I>3500)                          //积分限幅
-		speed_I = 3500;
-	else if(speed_I<-3500)
-		speed_I = -3500;
+	//3500
+	if(speed_I>4000)                          //积分限幅
+		speed_I = 4000;
+	else if(speed_I<-4000)
+		speed_I = -4000;
 	
 //		if(speed_error>300||speed_error<-300)
 //			speed_I = 0;

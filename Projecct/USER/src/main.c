@@ -5,7 +5,8 @@ extern u8 max,min;
 extern uint16 adc1,adc2,adc_value1[5];
 extern float speed_now,speed_need,speed_error;//现在、需要、偏差速度
 extern double speed_I;//速度的积分
-extern int16 turn_error,OutData[4],sensor[3];
+extern int16 OutData[4],sensor[3];
+extern long turn_error;
 extern float PWM_TURN,Gyro_Turn,PWM_ANGLE,PWM_SPEED,PWM_SPEED_OUT;
 extern float Gyro,Angle,Angle_Last,Gyro_Last,Gyro_ago,ANGLE_I,Gyro_Turn,PWM_ANGLE_AGO;
 int16 sensor1=0;
@@ -51,12 +52,11 @@ int main()
 		
 		//发送波形到上位机		
 #if 1	
-		 OutData[0] = (int16)adc1;//speed_I;  //speed_now
+		 OutData[0] = (int16)speed_I;  //speed_now
       // OutData[0] = (int16)Angle;                   //红
 		
-	  	OutData[1] = (int16)turn_error;	//PWM_ANGLE
-    			                  		         //黄
-      OutData[2] = (int16)adc2;//PWM_SPEED_OUT;//PWM_SPEED;              		 //蓝
+	  	OutData[1] = (int16)	PWM_TURN;    			                  		         //黄
+      OutData[2] = (int16)turn_error;//PWM_SPEED;              		 //蓝
       OutData[3] = (int16)speed_now;//P_SPEED*speed_error*0.01;//turn_error;             			 //紫
       OutPut_Data();
 

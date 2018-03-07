@@ -3,7 +3,8 @@
 uint16 adc_value1[5]={0},adc_value2[5]={0},adc_value3[5]={0},adc1=0,adc2=0,adc3=0;
 
 		u8 max=0; u8 min=0;
-int16 turn_error,turn_need;                     
+int16 turn_need;  
+long turn_error;
 float PWM_TURN;
 float adc1_max = 0,adc1_min = 0,adc2_max = 0,adc2_min = 0,adc3_max = 0,adc3_min = 0;
 
@@ -40,8 +41,8 @@ void get_track()
           min = min_sort(adc_value1,5);
           adc1 -= adc_value1[max];
           adc1 -= adc_value1[min];
-          adc1 = adc1/3/25;
-                   
+          adc1 = adc1/3/25;   //25        
+					
           for(i=0;i<5;i++)
           {
              adc_value2[i] = (uint16)adc_once(ADC0_SE1,ADC_12bit);
@@ -58,7 +59,7 @@ void get_track()
           min = min_sort(adc_value2,5);
           adc2 -= adc_value2[max];
           adc2 -= adc_value2[min];
-          adc2 = adc2/3/25;
+          adc2 = adc2/3/25;  //25
                     
          for(i=0;i<5;i++)
           {
@@ -79,10 +80,15 @@ void get_track()
           adc3 = adc3/3/25;
 					
 #ifdef  DEBUG_MODE
-					if(adc1<10&&adc2<10)
+					if((adc1<10&&adc2<10))
 						turn_error = 0;
 					else
 						turn_error = (sqrt(adc1)-sqrt(adc2))/(adc1+adc2)*400;//该公式在adc为0~100时，结果为-40~40，单调递增 
+					
+					if(turn_error>=0)
+						turn_error = turn_error*turn_error/40;
+					else
+						turn_error = -(turn_error*turn_error/40);
 					  sensor[0]=adc1;
 	          sensor[1]=adc2;
 #else
@@ -155,7 +161,7 @@ void duty_turn()
 	
 	/******************************************************普通PD***************************************************/
 	#ifdef  USE_TURN_PD
-	PWM_TURN = P_TURN*turn_error*5 - D_TURN*Gyro_Turn/10;
+	PWM_TURN = P_TURN*turn_error - D_TURN*Gyro_Turn/10;
 	#endif
 	
 	
@@ -246,16 +252,16 @@ void duty_turn()
 	
 	
 /******************************************************最大转弯半径限制***************************************/
-	#ifdef  MAX_RADIUS1
-	if(abs(PWM_TURN )>400)
-	{
-		if(PWM_TURN<0)
-			PWM_TURN=-400;
-		else
-	    PWM_TURN=400;
-	}
+
+	if(PWM_TURN >800)
+
+		  PWM_TURN=800;
+	else if(PWM_TURN <-700)
+			PWM_TURN=-800;
 	
-	#endif
+
+	
+
 	
 		
 }
