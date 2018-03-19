@@ -29,8 +29,8 @@ int   myabs(int dat);
 void  my_delay(long t);
 float limit(float x, uint16 y);
 int16 limit_ab(int16 x, uint16 a, uint16 b);
-u8 max_sort(int16* arr, u8 n);
-u8 min_sort(int16* arr, u8 n);
+u8 max_sort(uint16* arr, u8 n);
+u8 min_sort(uint16* arr, u8 n);
 
 
 
