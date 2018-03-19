@@ -80,18 +80,27 @@ void get_track()
           adc3 = adc3/3/25;
 					
 #ifdef  DEBUG_MODE
-					if((adc1<3&&adc2<3))
+				 	while((adc1==0)&&(adc2==0))
+					{
 						turn_error = 0;
-					else
-						turn_error = (sqrt(adc1)-sqrt(adc2))/(adc1+adc2)*400;//该公式在adc为0~100时，结果为-40~40，单调递增 
+						ftm_pwm_duty(ftm2,ftm_ch0,0); //62
+						ftm_pwm_duty(ftm2,ftm_ch1,0); //62
+						ftm_pwm_duty(ftm2,ftm_ch2,0); //62
+						ftm_pwm_duty(ftm2,ftm_ch3,0); //62
+
+					}
+						if(adc1==0&&adc2==0)
+							turn_error = 0;
+						else
+							turn_error = (sqrt(adc1)-sqrt(adc2))/(adc1+adc2)*400;//该公式在adc为0~100时，结果为-40~40，单调递增 
 					
 				/*	if(turn_error<3)
 						turn_error = 0;*/
 					
-					if(turn_error>=0)
+			/*		if(turn_error>=0)
 						turn_error = turn_error*turn_error/40;
 					else
-						turn_error = -(turn_error*turn_error/40);
+						turn_error = -(turn_error*turn_error/40);*/
 					  sensor[0]=adc1;
 	          sensor[1]=adc2;
 #else
@@ -256,11 +265,11 @@ void duty_turn()
 	
 /******************************************************最大转弯半径限制***************************************/
 
-	if(PWM_TURN >350)
+	if(PWM_TURN >400)
 
-		  PWM_TURN=350;
-	else if(PWM_TURN <-350)
-			PWM_TURN=-350;
+		  PWM_TURN=400;
+	else if(PWM_TURN <-400)
+			PWM_TURN=-400;
 	
 
 	
