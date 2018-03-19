@@ -83,10 +83,10 @@ void get_track()
 				 	if((adc1<2)&&(adc2<2))
 					{
 						turn_error = 0;
-//						ftm_pwm_duty(ftm2,ftm_ch0,0); //62
-//						ftm_pwm_duty(ftm2,ftm_ch1,0); //62
-//						ftm_pwm_duty(ftm2,ftm_ch2,0); //62
-//						ftm_pwm_duty(ftm2,ftm_ch3,0); //62
+						ftm_pwm_duty(ftm2,ftm_ch0,0); //62
+						ftm_pwm_duty(ftm2,ftm_ch1,0); //62
+						ftm_pwm_duty(ftm2,ftm_ch2,0); //62
+						ftm_pwm_duty(ftm2,ftm_ch3,0); //62
 
 					}
 
@@ -95,10 +95,10 @@ void get_track()
 				/*	if(turn_error<3)
 						turn_error = 0;*/
 					
-					if(turn_error>=0)
-						turn_error = turn_error*turn_error/40;
-					else
-						turn_error = -(turn_error*turn_error/40);
+//					if(turn_error>=0)
+//						turn_error = turn_error*turn_error/40;
+//					else
+//						turn_error = -(turn_error*turn_error/40);
 					  sensor[0]=adc1;
 	          sensor[1]=adc2;
 #else

@@ -16,7 +16,7 @@ extern uint16 adc1,adc2;
 
 uint8 cnt = 0;
 float PWM_L,PWM_R,PWM;
-u8 P_A=13,D_A=28,P_S=28,I_S=28,P_T=13,D_T=8;
+u8 P_A=24,D_A=11,P_S=17,I_S=28,P_T=20,D_T=8;
 
 //PWM输出
 void duty_pwm()
@@ -37,8 +37,16 @@ void duty_pwm()
 	else if(Debug_Mode==2)
 	{
 	PWM = PWM_ANGLE + PWM_SPEED_OUT;//速度负反馈，提供倾角
-	PWM_L = PWM - PWM_TURN;
-	PWM_R = PWM + PWM_TURN;
+if(PWM_TURN>0)
+		{
+			PWM_L = PWM - PWM_TURN;//*1.6;
+			PWM_R = PWM + PWM_TURN;
+		}
+		else
+		{
+			PWM_L = PWM - PWM_TURN;
+			PWM_R = PWM + PWM_TURN;//*1.6;
+		}
 	}
 	
 	/***********************将最大速度限制在985个PWM内******************************/
