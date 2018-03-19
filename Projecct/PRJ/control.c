@@ -16,7 +16,7 @@ extern uint16 adc1,adc2;
 
 uint8 cnt = 0;
 float PWM_L,PWM_R,PWM;
-u8 P_A=13,D_A=28,P_S=28,I_S=28,P_T=13,D_T=8;
+u8 P_A=24,D_A=11,P_S=17,I_S=28,P_T=20,D_T=8;
 
 //PWMÊä³ö
 void duty_pwm()
