@@ -4,7 +4,7 @@ uint16 adc_value1[5]={0},adc_value2[5]={0},adc_value3[5]={0},adc1=0,adc2=0,adc3=
 
 		u8 max=0; u8 min=0;
 int16 turn_need;  
-long turn_error;
+double turn_error;
 float PWM_TURN;
 float adc1_max = 0,adc1_min = 0,adc2_max = 0,adc2_min = 0,adc3_max = 0,adc3_min = 0;
 
@@ -80,9 +80,16 @@ void get_track()
           adc3 = adc3/3/25;
 					
 #ifdef  DEBUG_MODE
-					if((adc1<3&&adc2<3))
+				 	if((adc1<2)&&(adc2<2))
+					{
 						turn_error = 0;
-					else
+//						ftm_pwm_duty(ftm2,ftm_ch0,0); //62
+//						ftm_pwm_duty(ftm2,ftm_ch1,0); //62
+//						ftm_pwm_duty(ftm2,ftm_ch2,0); //62
+//						ftm_pwm_duty(ftm2,ftm_ch3,0); //62
+
+					}
+
 						turn_error = (sqrt(adc1)-sqrt(adc2))/(adc1+adc2)*400;//该公式在adc为0~100时，结果为-40~40，单调递增 
 					
 				/*	if(turn_error<3)
@@ -256,11 +263,11 @@ void duty_turn()
 	
 /******************************************************最大转弯半径限制***************************************/
 
-	if(PWM_TURN >350)
+	if(PWM_TURN >400)
 
-		  PWM_TURN=350;
-	else if(PWM_TURN <-350)
-			PWM_TURN=-350;
+		  PWM_TURN=400;
+	else if(PWM_TURN <-400)
+			PWM_TURN=-400;
 	
 
 	

@@ -74,10 +74,14 @@ void duty_speed()                                  //╡Бйтоб╪скы╫в╤нй╠╪Дё╛╪╢й╠╪ДЁ
 	{
 		SPEED_MAX = 500;
 	}
+	else if(speed_now<600)
+	{
+		SPEED_MAX = ((float)600-(float)speed_now)/(600-200)*400 + 100;
+	} 
 	else
 	{
-		SPEED_MAX = ((float)speed_need-(float)speed_now)/(speed_need-200)*400 + 100;
-	} 
+		SPEED_MAX = 100;
+	}
 	
 	
 	if(PWM_SPEED_OUT>SPEED_MAX)

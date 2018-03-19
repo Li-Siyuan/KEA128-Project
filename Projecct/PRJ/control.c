@@ -12,7 +12,7 @@ extern int16 OutData[4];
 extern u8 P_A,D_A,P_S,I_S,P_T,D_T;
 extern float PWM_ANGLE,PWM_SPEED_OUT,PWM_TURN;
 extern float Gyro,Angle,Angle_Last,Gyro_Last,Gyro_ago,ANGLE_I,Gyro_Turn,PWM_ANGLE_AGO;                         //处理后原始数据
-
+extern uint16 adc1,adc2;
 
 uint8 cnt = 0;
 float PWM_L,PWM_R,PWM;
@@ -53,28 +53,29 @@ void duty_pwm()
 			PWM_R = -(1000-PWM_R_END);
 		
   /*****************设置占空比*********************************************************/
-		if(PWM_R<0)
-		{
-			ftm_pwm_duty(ftm2,ftm_ch1,0);     //设置占空比为百分之（100/FTM0_PRECISON*100）
-			ftm_pwm_duty(ftm2,ftm_ch0,(u32)(-PWM_R+PWM_R_END)); //62
-		}
-		else
-		{
-			ftm_pwm_duty(ftm2,ftm_ch0,0);     //设置占空比为百分之（100/FTM0_PRECISON*100）
-			ftm_pwm_duty(ftm2,ftm_ch1,(u32)(PWM_R+PWM_R_END)); 
-		}
-		if(PWM_L<0)
-		{
-			ftm_pwm_duty(ftm2,ftm_ch3,0);
-			ftm_pwm_duty(ftm2,ftm_ch2,(u32)(-PWM_L+PWM_L_END));//62
-		}
-		else
-		{
-			ftm_pwm_duty(ftm2,ftm_ch2,0);
-			ftm_pwm_duty(ftm2,ftm_ch3,(u32)(PWM_L+PWM_L_END));
-		}
-		
-		
+
+
+			if(PWM_R<0)
+			{
+				ftm_pwm_duty(ftm2,ftm_ch1,0);     //设置占空比为百分之（100/FTM0_PRECISON*100）
+				ftm_pwm_duty(ftm2,ftm_ch0,(u32)(-PWM_R+PWM_R_END)); //62
+			}
+			else
+			{
+				ftm_pwm_duty(ftm2,ftm_ch0,0);     //设置占空比为百分之（100/FTM0_PRECISON*100）
+				ftm_pwm_duty(ftm2,ftm_ch1,(u32)(PWM_R+PWM_R_END)); 
+			}
+			if(PWM_L<0)
+			{
+				ftm_pwm_duty(ftm2,ftm_ch3,0);
+				ftm_pwm_duty(ftm2,ftm_ch2,(u32)(-PWM_L+PWM_L_END));//62
+			}
+			else
+			{
+				ftm_pwm_duty(ftm2,ftm_ch2,0);
+				ftm_pwm_duty(ftm2,ftm_ch3,(u32)(PWM_L+PWM_L_END));
+			}
+
 }
 
 

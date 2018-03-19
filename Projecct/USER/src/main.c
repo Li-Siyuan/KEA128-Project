@@ -6,7 +6,7 @@ extern uint16 adc1,adc2,adc_value1[5];
 extern float speed_now,speed_need,speed_error;//现在、需要、偏差速度
 extern double speed_I;//速度的积分
 extern int16 OutData[4],sensor[3];
-extern long turn_error;
+extern double turn_error;
 extern float PWM_TURN,Gyro_Turn,PWM_ANGLE,PWM_SPEED,PWM_SPEED_OUT;
 extern float Gyro,Angle,Angle_Last,Gyro_Last,Gyro_ago,ANGLE_I,Gyro_Turn,PWM_ANGLE_AGO;
 int16 sensor1=0;
