@@ -52,11 +52,11 @@ int main()
 		
 		//发送波形到上位机		
 #if 1	
-		 OutData[0] = (int16)speed_I;  //speed_now
+		 OutData[0] = (int16)PWM_SPEED_OUT;  //speed_now
       // OutData[0] = (int16)Angle;                   //红
 		
-	  	OutData[1] = (int16)	PWM_TURN;    			                  		         //黄
-      OutData[2] = (int16)turn_error;//PWM_SPEED;              		 //蓝
+	  	OutData[1] = (int16)speed_I;    			                  		         //黄
+      OutData[2] = (int16)PWM_TURN;//PWM_SPEED;              		 //蓝
       OutData[3] = (int16)speed_now;//P_SPEED*speed_error*0.01;//turn_error;             			 //紫
       OutPut_Data();
 

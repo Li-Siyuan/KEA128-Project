@@ -12,7 +12,7 @@
 #define gyro_offset_z            9//9              //陀螺仪中值        //加大向后，减少向前
 #define gyro_offset_x            0              //陀螺仪中值 
 #define Gyro_ratio             	 0.8// 0.01    //陀螺仪归一化系数
-#define angle_offset             170             //加速度计中值
+#define angle_offset             70             //加速度计中值
 #define  Angle_ratio             11           //加速度计归一化系数
 
 

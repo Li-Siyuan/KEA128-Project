@@ -1,14 +1,16 @@
 #include "speed.h"
 
-float speedL , speedR ,speed_error,speed_need=1400,speed_now; 
+float speedL , speedR ,speed_error,speed_need=800,speed_now; 
 double speed_I=0;
 float I_MOVE=1;
 float PWM_SPEED,PWM_SPEED_OUT,PWM_SPEED_AGO;
-float MOVE=1.6;
+float MOVE=6;
 extern int16 Angle_Need;
 extern uint8 cnt;
 extern u8 P_S,I_S;
 extern float PWM_ANGLE;
+
+int16 SPEED_MAX = 0;
 
 //ËÙ¶È»·:Ò»¸ö½Ç¶È¶ÔÓ¦Ò»¸öËÙ¶È£¬ËÙ¶È»·Í¨¹ýÊä³ö·´Ïò¼ÓËÙ¶È²úÉú½Ç¶È£¬´Ó¶ø²úÉú¶ÔÓ¦ËÙ¶È £¨PWM£¨µç»úµÄµçÑ¹ÓÐÐ§Öµ£©¿ØÖÆµÄÊÇ¼ÓËÙ¶È£¬¶ø²»ÊÇËÙ¶È£©
 /**************e³µ²ÎÊý****************/
@@ -34,24 +36,24 @@ void duty_speed()                                  //²âÊÔÏÂ¼ÓËÙ½×¶ÎÊ±¼ä£¬¼´Ê±¼ä³
 	speed_error = (speed_need - speed_now);    //µÃµ½ËÙ¶ÈÆ«²î
         
 	//ÉèÖÃ±äËÙ»ý·ÖÏµÊý
-if((speed_error>=0?speed_error:-speed_error)<I_MIN)
+/*if((speed_error>=0?speed_error:-speed_error)<I_MIN)
 		I_MOVE = 1;
 	else if(((speed_error>=0?speed_error:-speed_error)>=I_MIN) && ((speed_error>=0?speed_error:-speed_error)<I_MAX))
 		I_MOVE = ((speed_error>=0?speed_error:-speed_error)-I_MIN)/(I_MAX-I_MIN);
 	else if((speed_error>=0?speed_error:-speed_error)>=I_MAX)
-		I_MOVE = 0;
+		I_MOVE = 0;*/
 	/*if(speed_error>25)
 			I_MOVE = 0;*/	
 	
-			speed_I += speed_error*I_MOVE*0.1;          //±äËÙ»ý·Ö          
+			speed_I += speed_error*I_MOVE*0.01;          //±äËÙ»ý·Ö          
 	
 //	if((flag_I==0)||(PWM>0&&speed_I<0)||(PWM<0&&speed_I>0))   //ÈôÃ»ÓÐ±¥ºÍ»ò·´Ïò»ý·Ö£¬ÔòÀÛ¼Ó»ý·ÖÁ¿
 	
 	//3500
-	if(speed_I>4000)                          //»ý·ÖÏÞ·ù
-		speed_I = 4000;
-	else if(speed_I<-4000)
-		speed_I = -4000;
+	if(speed_I>550)                          //»ý·ÖÏÞ·ù
+		speed_I = 550;
+	else if(speed_I<-550)
+		speed_I = -550;
 	
 //		if(speed_error>300||speed_error<-300)
 //			speed_I = 0;
@@ -66,7 +68,22 @@ if((speed_error>=0?speed_error:-speed_error)<I_MIN)
 		PWM_SPEED_OUT = MOVE*(PWM_ANGLE>0?PWM_ANGLE:-PWM_ANGLE);
 	else if(PWM_SPEED_OUT < -MOVE*(PWM_ANGLE>0?PWM_ANGLE:-PWM_ANGLE))
 		PWM_SPEED_OUT = -MOVE*(PWM_ANGLE>0?PWM_ANGLE:-PWM_ANGLE);
-
+	
+	
+	if(speed_now < 200)
+	{
+		SPEED_MAX = 500;
+	}
+	else
+	{
+		SPEED_MAX = ((float)speed_need-(float)speed_now)/(speed_need-200)*400 + 100;
+	} 
+	
+	
+	if(PWM_SPEED_OUT>SPEED_MAX)
+		PWM_SPEED_OUT = SPEED_MAX;
+	else if(PWM_SPEED_OUT<-SPEED_MAX)
+		PWM_SPEED_OUT = -SPEED_MAX;
 }
 
 
