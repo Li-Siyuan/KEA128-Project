@@ -12,7 +12,7 @@ extern float PWM_ANGLE,PWM_TURN;
 extern float Gyro,Angle,Angle_Last,Gyro_Last,Gyro_ago,ANGLE_I,Gyro_Turn,PWM_ANGLE_AGO;      //处理后原始数据
 extern uint16 adc1,adc2;
 
-uint8 cnt = 0;
+double cnt = 0;
 float PWM_L,PWM_R,PWM;
 u8 P_A=24,D_A=11,P_S=17,I_S=28,P_T=20,D_T=8;
 
@@ -21,65 +21,19 @@ void duty_pwm()
 {
 	
 	
-	PWM = PWM_ANGLE;//串级在角度环已经进行加和
-
-	PWM_L = PWM - PWM_TURN;
-	PWM_R = PWM + PWM_TURN;
-	 
-	/***********************将最大速度限制在985个PWM内******************************/
-    if(PWM_L > (1000-PWM_L_END))  
-			PWM_L = (1000-PWM_L_END);
-    else if(PWM_L < -(1000-PWM_L_END)) 
-			PWM_L = -(1000-PWM_L_END);
-		
-    if(PWM_R > (1000-PWM_R_END))  
-			PWM_R = (1000-PWM_R_END);
-    else if(PWM_R < -(1000-PWM_R_END)) 
-			PWM_R = -(1000-PWM_R_END);
-		
+	PWM = cnt;
+	PWM=PWM_L;
+	PWM=PWM_R;
   /*****************设置占空比*********************************************************/
-
-
-			if(PWM_R<0)
-			{
-				ftm_pwm_duty(ftm2,ftm_ch1,0);     //设置占空比为百分之（100/FTM0_PRECISON*100）
-				ftm_pwm_duty(ftm2,ftm_ch0,(u32)(-PWM_R+PWM_R_END)); //62
-			}
-			else
-			{
-				ftm_pwm_duty(ftm2,ftm_ch0,0);     //设置占空比为百分之（100/FTM0_PRECISON*100）
-				ftm_pwm_duty(ftm2,ftm_ch1,(u32)(PWM_R+PWM_R_END)); 
-			}
-			if(PWM_L<0)
-			{
-				ftm_pwm_duty(ftm2,ftm_ch3,0);
-				ftm_pwm_duty(ftm2,ftm_ch2,(u32)(-PWM_L+PWM_L_END));//62
-			}
-			else
-			{
-				ftm_pwm_duty(ftm2,ftm_ch2,0);
-				ftm_pwm_duty(ftm2,ftm_ch3,(u32)(PWM_L+PWM_L_END));
-			}
 
 }
 
 //中断服务回调函数
 void duty_5ms()
 {
-	
-	cnt++;		
-		//转向环
-//		duty_turn();
-		//100ms一次速度环
-		if(cnt==20)
-		{
-			duty_speed();
-			cnt = 0;
-		}
-	//5ms一次直立环和电机输出PWM
-	duty_angle();
 	duty_pwm();
-	
+	cnt=cnt+1*1;//使用时修改此处的参数1，使得PWM以不同的速率变化。可以测试一下带载和空转两种状态！看看曲线有什么区别。
+	//最后使用的肯定是带载时的曲线
 }
 
 

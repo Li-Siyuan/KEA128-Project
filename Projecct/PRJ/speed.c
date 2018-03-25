@@ -50,36 +50,6 @@ void duty_speed()                                  //²âÊÔÏÂ¼ÓËÙ½×¶ÎÊ±¼ä£¬¼´Ê±¼ä³
 	//20·ÖÈý½ÇÐÎÊä³ö£¬ÐÞ¸ÄÔ­À´µÄÌÝÐÎÇúÏßÎªÐ±ÆÂÕÛÏß
 	PWM_SPEED = P_SPEED*speed_error+ I_SPEED*speed_I;//£¨Êä³ö¼ÓËÙ¶È£¨ÆÚÍû½Ç¶È£©£©	£¬ÏÈµ÷I£¬ºóµ÷P
 	PWM_SPEED_OUT = PWM_SPEED;
-
-	
-	
-	
-//ÒÔÏÂÈ«²¿¶¼ÊÇËÙ¶È»·µÄ×î´óÖµºÍ¶ÔÓ¦ÏÞ·ùµÄÖ´ÐÐ
-
-
-//ÏÞ·ùËÙ¶È»·Êä³ö×î´óÎª½Ç¶È»·µÄMOVE±¶
-//	if(PWM_SPEED_OUT >MOVE*(PWM_ANGLE>0?PWM_ANGLE:-PWM_ANGLE))
-//		PWM_SPEED_OUT = MOVE*(PWM_ANGLE>0?PWM_ANGLE:-PWM_ANGLE);
-//	else if(PWM_SPEED_OUT < -MOVE*(PWM_ANGLE>0?PWM_ANGLE:-PWM_ANGLE))
-//		PWM_SPEED_OUT = -MOVE*(PWM_ANGLE>0?PWM_ANGLE:-PWM_ANGLE);
-
-
-//	if(speed_now < 100)
-//	{
-//		SPEED_MAX = 600;
-//	}
-//	else if(speed_now <speed_need)
-//	{
-//		SPEED_MAX = ((float)speed_need-(float)speed_now)/((float)speed_need-100)*300 + 300;
-//	}
-//	else
-//	{
-//		SPEED_MAX = 200;
-//	}
-//	if(PWM_SPEED_OUT>SPEED_MAX)
-//		PWM_SPEED_OUT = SPEED_MAX;
-//	else if(PWM_SPEED_OUT<-SPEED_MAX)
-//		PWM_SPEED_OUT = -SPEED_MAX;
 }
 
 
