@@ -491,8 +491,8 @@ ARM Macro Assembler    Page 8
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M0+ --apcs=inter
 work --depend=.\objects\startup_skeaz1284.d -o.\objects\startup_skeaz1284.o -I.
-\RTE\_KEA128 -IC:\Keil_v5\ARM\PACK\Keil\Kinetis_KEAxx_DFP\1.3.0\Device\Include 
--IC:\Keil_v5\ARM\CMSIS\Include --predefine="__MICROLIB SETA 1" --predefine="__U
+\RTE\_KEA128 -ID:\Keil_v5\ARM\PACK\Keil\Kinetis_KEAxx_DFP\1.3.0\Device\Include 
+-Id:\Keil_v5\ARM\CMSIS\Include --predefine="__MICROLIB SETA 1" --predefine="__U
 VISION_VERSION SETA 524" --predefine="SKEAZ128xxx4 SETA 1" --list=.\listings\st
 artup_skeaz1284.lst ..\..\Libraries\startup\DeviceSupport\MDK-ARM\startup_SKEAZ
 1284.s

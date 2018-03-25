@@ -4,10 +4,10 @@
 .\objects\master.o: ..\..\Libraries\drives\inc\common.h
 .\objects\master.o: ..\..\Libraries\drives\inc\headfile.h
 .\objects\master.o: ..\..\Libraries\drives\inc\KEA128_port_cfg.h
-.\objects\master.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\master.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\master.o: ..\..\Libraries\drives\inc\KEA128_ftm.h
 .\objects\master.o: ..\..\Libraries\startup\DeviceSupport\SKEAZ1284.h
-.\objects\master.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\master.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\master.o: ..\..\Libraries\startup\CoreSupport\core_cm0plus.h
 .\objects\master.o: ..\..\Libraries\startup\CoreSupport\core_cmInstr.h
 .\objects\master.o: ..\..\Libraries\startup\CoreSupport\core_cmFunc.h
@@ -33,7 +33,7 @@
 .\objects\master.o: ..\..\Libraries\startup\DeviceSupport\SKEAZ1284.h
 .\objects\master.o: ..\..\Libraries\drives\inc\KEA128_i2c.h
 .\objects\master.o: ..\..\Libraries\startup\DeviceSupport\SKEAZ1284.h
-.\objects\master.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\master.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\master.o: ..\..\Libraries\drives\inc\KEA128_spi.h
 .\objects\master.o: ..\..\Libraries\startup\DeviceSupport\SKEAZ1284.h
 .\objects\master.o: ..\..\Libraries\seekfree\SEEKFREE_FUN.h

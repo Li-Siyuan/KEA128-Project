@@ -80,15 +80,15 @@ void get_track()
           adc3 = adc3/3/25;
 					
 #ifdef  DEBUG_MODE
-				 	while((adc1==0)&&(adc2==0))
-					{
-						turn_error = 0;
-						ftm_pwm_duty(ftm2,ftm_ch0,0); //62
-						ftm_pwm_duty(ftm2,ftm_ch1,0); //62
-						ftm_pwm_duty(ftm2,ftm_ch2,0); //62
-						ftm_pwm_duty(ftm2,ftm_ch3,0); //62
-
-					}
+					//以下为出赛道死循环
+//				 	while((adc1==0)&&(adc2==0))
+//					{
+//						turn_error = 0;
+//						ftm_pwm_duty(ftm2,ftm_ch0,0); //62
+//						ftm_pwm_duty(ftm2,ftm_ch1,0); //62
+//						ftm_pwm_duty(ftm2,ftm_ch2,0); //62
+//						ftm_pwm_duty(ftm2,ftm_ch3,0); //62
+//					}
 						if(adc1==0&&adc2==0)
 							turn_error = 0;
 						else
@@ -160,12 +160,6 @@ void get_track()
 	
 }
 
-
-
-
-
-
-
 //转向环  //用(-40,40)表示turn_error所处位置
 void duty_turn()
 {
@@ -178,11 +172,6 @@ void duty_turn()
 	
 	
 	/******************************************************分组PD（关联速度）***************************************/
-	#ifdef  USE_TURN_MOVE_PD
-
-	
-	
-	#endif
 	
 	/*******************************************************模糊PD***************************************************/
 	#ifdef  USE_TURN_BLUR_PD

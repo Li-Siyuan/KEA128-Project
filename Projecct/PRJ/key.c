@@ -2,7 +2,6 @@
 
 extern float speed_need,MOVE;
 extern u8 P_A,D_A,P_S,I_S,P_T,D_T;
-extern char Debug_Mode;
 //extern int16 Angle_Need;
 float abc = 0;
 int8 mode=0;
@@ -24,7 +23,6 @@ void KEY_SCAN()
 			}
 			else if(mode>8&&mode<12)
 			{
-				Debug_Mode = mode-9;
 				OLED_ShowString(0,6,(uint8*)"Debug_Ok    ",16);
 			}
 			else

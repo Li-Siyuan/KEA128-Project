@@ -5,10 +5,10 @@
 .\objects\filter.o: ..\..\Libraries\drives\inc\common.h
 .\objects\filter.o: ..\..\Libraries\drives\inc\headfile.h
 .\objects\filter.o: ..\..\Libraries\drives\inc\KEA128_port_cfg.h
-.\objects\filter.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\filter.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\filter.o: ..\..\Libraries\drives\inc\KEA128_ftm.h
 .\objects\filter.o: ..\..\Libraries\startup\DeviceSupport\SKEAZ1284.h
-.\objects\filter.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\filter.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\filter.o: ..\..\Libraries\startup\CoreSupport\core_cm0plus.h
 .\objects\filter.o: ..\..\Libraries\startup\CoreSupport\core_cmInstr.h
 .\objects\filter.o: ..\..\Libraries\startup\CoreSupport\core_cmFunc.h
@@ -34,7 +34,7 @@
 .\objects\filter.o: ..\..\Libraries\startup\DeviceSupport\SKEAZ1284.h
 .\objects\filter.o: ..\..\Libraries\drives\inc\KEA128_i2c.h
 .\objects\filter.o: ..\..\Libraries\startup\DeviceSupport\SKEAZ1284.h
-.\objects\filter.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\filter.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\filter.o: ..\..\Libraries\drives\inc\KEA128_spi.h
 .\objects\filter.o: ..\..\Libraries\startup\DeviceSupport\SKEAZ1284.h
 .\objects\filter.o: ..\..\Libraries\seekfree\SEEKFREE_FUN.h
@@ -55,4 +55,4 @@
 .\objects\filter.o: ..\PRJ\key.h
 .\objects\filter.o: ..\PRJ\master.h
 .\objects\filter.o: ..\PRJ\COMPUTER.h
-.\objects\filter.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\filter.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

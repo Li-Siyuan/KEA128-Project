@@ -6,10 +6,10 @@
 .\objects\my_nrf.o: ..\..\Libraries\drives\inc\headfile.h
 .\objects\my_nrf.o: ..\..\Libraries\drives\inc\common.h
 .\objects\my_nrf.o: ..\..\Libraries\drives\inc\KEA128_port_cfg.h
-.\objects\my_nrf.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\my_nrf.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\my_nrf.o: ..\..\Libraries\drives\inc\KEA128_ftm.h
 .\objects\my_nrf.o: ..\..\Libraries\startup\DeviceSupport\SKEAZ1284.h
-.\objects\my_nrf.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\my_nrf.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\my_nrf.o: ..\..\Libraries\startup\CoreSupport\core_cm0plus.h
 .\objects\my_nrf.o: ..\..\Libraries\startup\CoreSupport\core_cmInstr.h
 .\objects\my_nrf.o: ..\..\Libraries\startup\CoreSupport\core_cmFunc.h
@@ -34,7 +34,7 @@
 .\objects\my_nrf.o: ..\..\Libraries\drives\inc\KEA128_systick.h
 .\objects\my_nrf.o: ..\..\Libraries\drives\inc\KEA128_i2c.h
 .\objects\my_nrf.o: ..\..\Libraries\startup\DeviceSupport\SKEAZ1284.h
-.\objects\my_nrf.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\my_nrf.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\my_nrf.o: ..\..\Libraries\drives\inc\KEA128_spi.h
 .\objects\my_nrf.o: ..\..\Libraries\startup\DeviceSupport\SKEAZ1284.h
 .\objects\my_nrf.o: ..\..\Libraries\seekfree\SEEKFREE_FUN.h

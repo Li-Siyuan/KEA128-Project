@@ -8,6 +8,10 @@ extern u8 P_A,D_A;
 extern int16 mpu_gyro_x,mpu_gyro_y,mpu_gyro_z;                 //原始数据
 extern int16 mpu_acc_x,mpu_acc_y,mpu_acc_z;
 
+
+extern float PWM_SPEED_OUT;//串级速度环输出
+
+
 #ifdef QingHua
 extern float g_fCarAngle;                 //融合滤波输出参数
 #endif
@@ -60,77 +64,20 @@ void angle_get()
 
 
 
-//直立环
+//直立环普通PD+串级
 void duty_angle()
 {
 	angle_get();
 	
 	/**************************************************************普通PD************************************************************************/
 #ifdef USE_ANGLE_PD 
-	PWM_ANGLE = P_ANGLE*Angle_Last + D_ANGLE*Gyro_Last/10;	
+	PWM_ANGLE = P_ANGLE*(Angle_Last+PWM_SPEED_OUT/P_ANGLE) + D_ANGLE*Gyro_Last/10;	
 #endif
 	
 	/**************************************************************滑动PD************************************************************************/
-#ifdef USE_ANGLE_MOVE_PD  
-  
-	//一、若角度偏差过大，使用较强控制
-	if((Angle_Last>Angle_max)||(Angle_Last<-Angle_max))
-		PWM_ANGLE = P_ANGLE_MAX*Angle_Last + D_ANGLE_MAX*Gyro_Last;
-	
-	//二、若角度偏差过小，使用较弱控制	
-	else if((Angle_Last<Angle_min)||(Angle_Last>-Angle_min))
-		PWM_ANGLE = P_ANGLE_MIN*Angle_Last + D_ANGLE_MIN*Gyro_Last;
-	
-	//三、否则、正常控制
-	else
-		PWM_ANGLE = P_ANGLE*Angle_Last + D_ANGLE*Gyro_Last;
-	
-#endif
 	
 	/**************************************************************专家PID***********************************************************************/
-#ifdef USE_ANGLE_EXPERT_PD 	
-	
-	ANGLE_I += Angle_Last;  //积分项
-	if(ANGLE_I>20)
-		ANGLE_I = 20;
-	else if(ANGLE_I<-20)
-		ANGLE_I = -20;
-	PWM_ANGLE_AGO = PWM_ANGLE;  
-		
-	//一、若角度偏差过大，直接开环最大输出
-	if((Angle_Last>Angle_max)||(Angle_Last<-Angle_max))
-		PWM_ANGLE = PWM_Angle_max;
-	 
-	//二、若角速度与角度同向（偏差向增大方向发展），或误差为一常值
-	else if((Angle_Last*Gyro_Last>0)||(Gyro_Last==0))
-	{
-		if((Angle_Last>Angle_max2)||(Angle_Last<-Angle_max2))      //同时角度误差较大，则正常PD控制乘以增益放大系数
-			PWM_ANGLE = K_max*(P_ANGLE*Angle_Last + D_ANGLE*Gyro_Last);
-		else                                                       //同时角度较小，则正常PD
-			PWM_ANGLE = P_ANGLE*Angle_Last + D_ANGLE*Gyro_Last;
-	}
-	
-	//三、若角速度与角度同向（偏差向减小方向发展）
-	else if(Angle_Last*Gyro_Last<0)
-	{
-		if((Gyro_Last*Gyro_ago>0)||Angle_Last==0)  //即将或已达到稳态，则保持输出值不变
-			PWM_ANGLE = PWM_ANGLE_AGO;
-		else if(Gyro_Last*Gyro_ago<0)               //处于临界状态
-		{
-			if((Angle_Last>Angle_max2)||(Angle_Last<-Angle_max2))    //同时偏差较大，乘以增益放大系数
-				PWM_ANGLE = K_max*P_ANGLE*Angle_Last;
-			else                                                     //同时偏差较小，乘以抑制系数
-				PWM_ANGLE = K_min*P_ANGLE*Angle_Last;
-		}		
-	}
-	
-	//四、控制同时，若角度偏差非常小，加入积分控制
-	if(Angle_Last<Angle_min)
-		PWM_ANGLE += I_ANGLE*ANGLE_I;	
-	
-#endif
-	
-	
+
 }
 
 

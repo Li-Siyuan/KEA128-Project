@@ -6,12 +6,10 @@
 #define PWM_R_END 60//95
 #define PWM_L_END 20//70
 
-char Debug_Mode = 2;
-
 extern int16 OutData[4];
 extern u8 P_A,D_A,P_S,I_S,P_T,D_T;
-extern float PWM_ANGLE,PWM_SPEED_OUT,PWM_TURN;
-extern float Gyro,Angle,Angle_Last,Gyro_Last,Gyro_ago,ANGLE_I,Gyro_Turn,PWM_ANGLE_AGO;                         //处理后原始数据
+extern float PWM_ANGLE,PWM_TURN;
+extern float Gyro,Angle,Angle_Last,Gyro_Last,Gyro_ago,ANGLE_I,Gyro_Turn,PWM_ANGLE_AGO;      //处理后原始数据
 extern uint16 adc1,adc2;
 
 uint8 cnt = 0;
@@ -21,36 +19,12 @@ u8 P_A=24,D_A=11,P_S=17,I_S=28,P_T=20,D_T=8;
 //PWM输出
 void duty_pwm()
 {
-	if(Debug_Mode==0)
-	{
-		PWM = PWM_ANGLE;
-    PWM_L = PWM;
-		PWM_R = PWM;
-	}
-	else if(Debug_Mode==1)
-	{
-		PWM = PWM_ANGLE + PWM_SPEED_OUT;//速度负反馈，提供倾角
-		PWM_L = PWM;
-		PWM_R = PWM;
-	}
 	
-	else if(Debug_Mode==2)
-	{
-	PWM = PWM_ANGLE + PWM_SPEED_OUT;//速度负反馈，提供倾角
-		if(PWM_TURN>0)
-		{
-			PWM_L = PWM - PWM_TURN;//*1.6;
-			PWM_R = PWM + PWM_TURN;
-		}
-		else
-		{
-			PWM_L = PWM - PWM_TURN;
-			PWM_R = PWM + PWM_TURN;//*1.6;
-		}
-		
+	
+	PWM = PWM_ANGLE;//串级在角度环已经进行加和
+
 	PWM_L = PWM - PWM_TURN;
 	PWM_R = PWM + PWM_TURN;
-	}
 	 
 	/***********************将最大速度限制在985个PWM内******************************/
     if(PWM_L > (1000-PWM_L_END))  
@@ -89,42 +63,21 @@ void duty_pwm()
 
 }
 
-
-
 //中断服务回调函数
 void duty_5ms()
 {
 	
-	cnt++;
-	//5ms一次直立环
-	duty_angle();
-		
-	
-	if(Debug_Mode==1)
-	{
-		//100ms一次速度环
-		if(cnt==20)
-		{
-			duty_speed();
-			cnt = 0;
-		}
-	}
-	
-	
-	else if(Debug_Mode==2)
-	{
+	cnt++;		
 		//转向环
-		duty_turn();
-		
+//		duty_turn();
 		//100ms一次速度环
 		if(cnt==20)
 		{
 			duty_speed();
 			cnt = 0;
 		}
-	}
-	
-	//电机输出PWM
+	//5ms一次直立环和电机输出PWM
+	duty_angle();
 	duty_pwm();
 	
 }

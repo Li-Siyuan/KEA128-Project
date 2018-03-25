@@ -4,10 +4,10 @@
 .\objects\seekfree_iic.o: ..\..\Libraries\drives\inc\common.h
 .\objects\seekfree_iic.o: ..\..\Libraries\drives\inc\headfile.h
 .\objects\seekfree_iic.o: ..\..\Libraries\drives\inc\KEA128_port_cfg.h
-.\objects\seekfree_iic.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\seekfree_iic.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\seekfree_iic.o: ..\..\Libraries\drives\inc\KEA128_ftm.h
 .\objects\seekfree_iic.o: ..\..\Libraries\startup\DeviceSupport\SKEAZ1284.h
-.\objects\seekfree_iic.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\seekfree_iic.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\seekfree_iic.o: ..\..\Libraries\startup\CoreSupport\core_cm0plus.h
 .\objects\seekfree_iic.o: ..\..\Libraries\startup\CoreSupport\core_cmInstr.h
 .\objects\seekfree_iic.o: ..\..\Libraries\startup\CoreSupport\core_cmFunc.h
@@ -33,7 +33,7 @@
 .\objects\seekfree_iic.o: ..\..\Libraries\startup\DeviceSupport\SKEAZ1284.h
 .\objects\seekfree_iic.o: ..\..\Libraries\drives\inc\KEA128_i2c.h
 .\objects\seekfree_iic.o: ..\..\Libraries\startup\DeviceSupport\SKEAZ1284.h
-.\objects\seekfree_iic.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\seekfree_iic.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\seekfree_iic.o: ..\..\Libraries\drives\inc\KEA128_spi.h
 .\objects\seekfree_iic.o: ..\..\Libraries\startup\DeviceSupport\SKEAZ1284.h
 .\objects\seekfree_iic.o: ..\..\Libraries\seekfree\SEEKFREE_FUN.h

@@ -6,10 +6,10 @@
 .\objects\oled_iic.o: ..\..\Libraries\drives\inc\headfile.h
 .\objects\oled_iic.o: ..\..\Libraries\drives\inc\common.h
 .\objects\oled_iic.o: ..\..\Libraries\drives\inc\KEA128_port_cfg.h
-.\objects\oled_iic.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\oled_iic.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\oled_iic.o: ..\..\Libraries\drives\inc\KEA128_ftm.h
 .\objects\oled_iic.o: ..\..\Libraries\startup\DeviceSupport\SKEAZ1284.h
-.\objects\oled_iic.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\oled_iic.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\oled_iic.o: ..\..\Libraries\startup\CoreSupport\core_cm0plus.h
 .\objects\oled_iic.o: ..\..\Libraries\startup\CoreSupport\core_cmInstr.h
 .\objects\oled_iic.o: ..\..\Libraries\startup\CoreSupport\core_cmFunc.h
@@ -34,7 +34,7 @@
 .\objects\oled_iic.o: ..\..\Libraries\drives\inc\KEA128_systick.h
 .\objects\oled_iic.o: ..\..\Libraries\drives\inc\KEA128_i2c.h
 .\objects\oled_iic.o: ..\..\Libraries\startup\DeviceSupport\SKEAZ1284.h
-.\objects\oled_iic.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\oled_iic.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\oled_iic.o: ..\..\Libraries\drives\inc\KEA128_spi.h
 .\objects\oled_iic.o: ..\..\Libraries\startup\DeviceSupport\SKEAZ1284.h
 .\objects\oled_iic.o: ..\..\Libraries\seekfree\SEEKFREE_FUN.h
